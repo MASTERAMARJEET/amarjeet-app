@@ -7,10 +7,11 @@
       "outputs": ["dist/**"]
     },
     "typegen": {
-      "dependsOn": ["^typegen"]
+      "dependsOn": ["^typegen"],
+      "inputs": ["$TURBO_ROOT$/apps/api/wrangler.toml", "$TURBO_ROOT$/apps/web/wrangler.toml"]
     },
     "check-types": {
-      "dependsOn": ["^check-types"]
+      "dependsOn": ["^check-types", "typegen"]
     },
     "format": {
       "dependsOn": ["^format"]

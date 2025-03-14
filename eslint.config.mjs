@@ -1,7 +1,7 @@
 import antfu from "@antfu/eslint-config";
 
 export default antfu({
-  ignores: ["**/.astro", "**/.sst", "**/.wrangler"],
+  ignores: ["**/.astro", "**/.sst", "**/.wrangler", "**/worker-configuration.d.ts"],
   lessOpinionated: true,
   stylistic: {
     overrides: {

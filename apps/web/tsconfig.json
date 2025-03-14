@@ -13,7 +13,6 @@
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"]
     },
-    "types": ["@cloudflare/workers-types/2023-07-01"],
     "exactOptionalPropertyTypes": false
   },
   "exclude": ["dist"]

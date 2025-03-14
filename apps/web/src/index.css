@@ -1,9 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-  .breadcrumbs {
-    @apply capitalize sticky top-16 z-10 bg-base-100 hidden sm:block;
-  }
-}

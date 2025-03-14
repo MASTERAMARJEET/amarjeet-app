@@ -1,22 +1,37 @@
-import typography from '@tailwindcss/typography';
-import daisyui from 'daisyui';
+import typography from "@tailwindcss/typography";
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: ["selector", "[data-theme='dark']"],
+  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
+    // Remove the following screen breakpoint or add other breakpoints
+    // if one breakpoint is not enough for you
+    screens: {
+      sm: "640px",
+    },
+
     extend: {
-      width: {
-        md: '768px',
+      fontFamily: {
+        mono: ["IBM Plex Mono", "monospace"],
       },
-      maxWidth: {
-        md: '768px',
+      typography: {
+        DEFAULT: {
+          css: {
+            pre: {
+              color: false,
+            },
+            code: {
+              color: false,
+            },
+          },
+        },
       },
     },
   },
   daisyui: {
-    themes: ['light'],
+    themes: ["light"],
     logs: false,
   },
-  plugins: [typography, daisyui],
+  plugins: [typography],
 };

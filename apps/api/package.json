@@ -2,7 +2,7 @@
   "name": "@masteramar/api",
   "type": "module",
   "version": "0.0.1",
-  "packageManger": "bun@1.1.33",
+  "packageManger": "bun@1.2.5",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
@@ -12,12 +12,11 @@
     "clean": "rm -rf node_modules .turbo .wrangler"
   },
   "dependencies": {
-    "@hono/swagger-ui": "0.4.1",
-    "@hono/zod-openapi": "0.16.4",
-    "hono": "4.6.7"
+    "@hono/swagger-ui": "0.5.1",
+    "@hono/zod-openapi": "0.19.2",
+    "hono": "4.7.4"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "4.20241022.0",
-    "wrangler": "3.84.0"
+    "wrangler": "4.0.0"
   }
 }

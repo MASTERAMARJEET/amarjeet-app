@@ -1,14 +1,113 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import LinkButton from "@components/LinkButton.astro";
+import Hr from "@components/Hr.astro";
+import Card from "@components/Card";
+import Socials from "@components/Socials.astro";
+import getSortedPosts from "@utils/getSortedPosts";
+import { SITE, SOCIALS } from "@config";
+
+const posts = await getCollection("blog");
+
+const sortedPosts = getSortedPosts(posts);
+const featuredPosts = sortedPosts.filter((post) => post.data.featured);
+const recentPosts = sortedPosts.filter((post) => !post.data.featured);
+
+const socialCount = SOCIALS.filter((social) => social.active).length;
 ---
 
-<PageLayout>
-  <section class="w-full py-8">
-    <h1 class="text-5xl">Hello!</h1>
-    <p class="py-3 text-2xl">
-      Welcome to Amarjeet's blog site. It is currently under construction 🚧.
-      Please visit again later
-    </p>
-  </section>
-  <div class="h-[60vh]"></div>
-</PageLayout>
+<Layout>
+  <Header />
+  <main id="main-content">
+    <section id="hero" class="pb-6 pt-8">
+      <h1 class="my-4 inline-block text-3xl font-bold sm:my-8 sm:text-5xl">
+        Amarjeet's Blog
+      </h1>
+      <a target="_blank" href="/rss.xml" class="mb-6" aria-label="rss feed">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="mb-2 h-6 w-6 scale-110 fill-accent sm:mb-3 sm:scale-125"
+          ><path
+            d="M19 20.001C19 11.729 12.271 5 4 5v2c7.168 0 13 5.832 13 13.001h2z"
+          ></path><path
+            d="M12 20.001h2C14 14.486 9.514 10 4 10v2c4.411 0 8 3.589 8 8.001z"
+          ></path><circle cx="6" cy="18" r="2"></circle>
+        </svg>
+        <span class="sr-only">RSS Feed</span>
+      </a>
+
+      <p class="my-2">
+        A home for all tech explorations and musings by Amarjeet
+      </p>
+      {
+        // only display if at least one social link is enabled
+        socialCount > 0 && (
+          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
+            <div class="mb-1 mr-2 whitespace-nowrap sm:mb-0">Social Links:</div>
+            <Socials />
+          </div>
+        )
+      }
+    </section>
+
+    <Hr />
+
+    {
+      featuredPosts.length > 0 && (
+        <>
+          <section id="featured" class="pb-6 pt-12">
+            <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
+            <ul>
+              {featuredPosts.map((post) => (
+                <Card
+                  href={`/posts/${post.id}/`}
+                  frontmatter={post.data}
+                  secHeading={false}
+                />
+              ))}
+            </ul>
+          </section>
+          {recentPosts.length > 0 && <Hr />}
+        </>
+      )
+    }
+
+    {
+      recentPosts.length > 0 && (
+        <section id="recent-posts" class="pb-6 pt-12">
+          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
+          <ul>
+            {recentPosts.map(
+              (post, index) =>
+                index < SITE.postPerIndex && (
+                  <Card
+                    href={`/posts/${post.id}/`}
+                    frontmatter={post.data}
+                    secHeading={false}
+                  />
+                ),
+            )}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      posts.length > 0 && (
+        <div class="my-8 text-center">
+          <LinkButton href="/posts/">
+            All Posts
+            <svg xmlns="http://www.w3.org/2000/svg">
+              <path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z" />
+            </svg>
+          </LinkButton>
+        </div>
+      )
+    }
+  </main>
+
+  <Footer />
+</Layout>

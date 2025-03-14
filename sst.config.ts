@@ -7,7 +7,7 @@ export default $config({
       removal: input?.stage === "production" ? "retain" : "remove",
       home: "cloudflare",
       providers: {
-        cloudflare: true,
+        cloudflare: { apiToken: process.env.SST_CLOUDFLARE_API_TOKEN },
         aws: true,
       },
     };

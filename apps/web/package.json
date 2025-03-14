@@ -2,7 +2,7 @@
   "name": "@masteramar/web",
   "type": "module",
   "version": "0.0.1",
-  "packageManger": "bun@1.1.33",
+  "packageManger": "bun@1.2.5",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

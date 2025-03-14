@@ -1,7 +1,8 @@
-import satori from "satori";
 import type { CollectionEntry } from "astro:content";
+import type { FontOptions } from "../loadGoogleFont";
 import { SITE } from "@config";
-import loadGoogleFonts, { type FontOptions } from "../loadGoogleFont";
+import satori from "satori";
+import loadGoogleFonts from "../loadGoogleFont";
 
 export default async (post: CollectionEntry<"blog">) => {
   return satori(
@@ -74,7 +75,8 @@ export default async (post: CollectionEntry<"blog">) => {
             }}
           >
             <span>
-              by{" "}
+              by
+              {" "}
               <span
                 style={{
                   color: "transparent",
@@ -99,8 +101,8 @@ export default async (post: CollectionEntry<"blog">) => {
       height: 630,
       embedFont: true,
       fonts: (await loadGoogleFonts(
-        post.data.title + post.data.author + SITE.title + "by"
+        `${post.data.title + post.data.author + SITE.title}by`,
       )) as FontOptions[],
-    }
+    },
   );
 };

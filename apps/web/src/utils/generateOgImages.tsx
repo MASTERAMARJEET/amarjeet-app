@@ -1,5 +1,5 @@
+import type { CollectionEntry } from "astro:content";
 import { initWasm, Resvg } from "@resvg/resvg-wasm";
-import { type CollectionEntry } from "astro:content";
 import postOgImage from "./og-templates/post";
 import siteOgImage from "./og-templates/site";
 
@@ -7,14 +7,17 @@ let initialized = false;
 
 async function initResvgWasm() {
   try {
-    if (initialized) return;
+    if (initialized) {
+      return;
+    }
     const wasmResponse = await fetch(
       "https://unpkg.com/@resvg/resvg-wasm@2.6.2/index_bg.wasm",
     );
     const wasmArrayBuffer = await wasmResponse.arrayBuffer();
     await initWasm(wasmArrayBuffer);
     initialized = true;
-  } catch (error) {
+  }
+  catch (error) {
     console.error("Resvg wasm not initialized", error);
   }
 }

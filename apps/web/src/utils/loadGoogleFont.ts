@@ -1,4 +1,4 @@
-import type { FontStyle, FontWeight } from 'satori';
+import type { FontStyle, FontWeight } from "satori";
 
 export interface FontOptions {
   name: string;
@@ -16,8 +16,8 @@ async function loadGoogleFont(
   const css = await (
     await fetch(API, {
       headers: {
-        'User-Agent':
-          'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1',
+        "User-Agent":
+          "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1",
       },
     })
   ).text();
@@ -27,7 +27,7 @@ async function loadGoogleFont(
   );
 
   if (!resource) {
-    throw new Error('Failed to download dynamic font');
+    throw new Error("Failed to download dynamic font");
   }
 
   const res = await fetch(resource[1] as string);
@@ -47,16 +47,16 @@ async function loadGoogleFonts(
   > {
   const fontsConfig = [
     {
-      name: 'IBM Plex Mono',
-      font: 'IBM+Plex+Mono',
+      name: "IBM Plex Mono",
+      font: "IBM+Plex+Mono",
       weight: 400,
-      style: 'normal',
+      style: "normal",
     },
     {
-      name: 'IBM Plex Mono',
-      font: 'IBM+Plex+Mono:wght@700',
+      name: "IBM Plex Mono",
+      font: "IBM+Plex+Mono:wght@700",
       weight: 700,
-      style: 'bold',
+      style: "bold",
     },
   ];
 

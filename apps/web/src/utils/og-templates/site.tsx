@@ -1,6 +1,7 @@
-import satori from "satori";
+import type { FontOptions } from "../loadGoogleFont";
 import { SITE } from "@config";
-import loadGoogleFonts, { type FontOptions } from "../loadGoogleFont";
+import satori from "satori";
+import loadGoogleFonts from "../loadGoogleFont";
 
 export default async () => {
   return satori(
@@ -90,8 +91,8 @@ export default async () => {
       height: 630,
       embedFont: true,
       fonts: (await loadGoogleFonts(
-        SITE.title + SITE.desc + SITE.website
+        SITE.title + SITE.desc + SITE.website,
       )) as FontOptions[],
-    }
+    },
   );
 };

@@ -1,14 +1,15 @@
-import Fuse from "fuse.js";
-import { useEffect, useRef, useState, useMemo, type FormEvent } from "react";
-import Card from "@components/Card";
 import type { CollectionEntry } from "astro:content";
+import type { FormEvent } from "react";
+import Card from "@components/Card";
+import Fuse from "fuse.js";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-export type SearchItem = {
+export interface SearchItem {
   title: string;
   description: string;
   data: CollectionEntry<"blog">["data"];
   slug: string;
-};
+}
 
 interface Props {
   searchList: SearchItem[];
@@ -23,7 +24,7 @@ export default function SearchBar({ searchList }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputVal, setInputVal] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[] | null>(
-    null
+    null,
   );
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
@@ -38,7 +39,7 @@ export default function SearchBar({ searchList }: Props) {
         minMatchCharLength: 2,
         threshold: 0.5,
       }),
-    [searchList]
+    [searchList],
   );
 
   useEffect(() => {
@@ -46,12 +47,14 @@ export default function SearchBar({ searchList }: Props) {
     // insert that search query in input field
     const searchUrl = new URLSearchParams(window.location.search);
     const searchStr = searchUrl.get("q");
-    if (searchStr) setInputVal(searchStr);
+    if (searchStr) {
+      setInputVal(searchStr);
+    }
 
     // put focus cursor at the end of the string
-    setTimeout(function () {
-      inputRef.current!.selectionStart = inputRef.current!.selectionEnd =
-        searchStr?.length || 0;
+    setTimeout(() => {
+      inputRef.current!.selectionStart = inputRef.current!.selectionEnd
+        = searchStr?.length || 0;
     }, 50);
   }, []);
 
@@ -65,10 +68,11 @@ export default function SearchBar({ searchList }: Props) {
     if (inputVal.length > 0) {
       const searchParams = new URLSearchParams(window.location.search);
       searchParams.set("q", inputVal);
-      const newRelativePathQuery =
-        window.location.pathname + "?" + searchParams.toString();
+      const newRelativePathQuery
+        = `${window.location.pathname}?${searchParams.toString()}`;
       history.replaceState(history.state, "", newRelativePathQuery);
-    } else {
+    }
+    else {
       history.replaceState(history.state, "", window.location.pathname);
     }
   }, [inputVal]);
@@ -97,17 +101,22 @@ export default function SearchBar({ searchList }: Props) {
 
       {inputVal.length > 1 && (
         <div className="mt-8">
-          Found {searchResults?.length}
+          Found
+          {" "}
+          {searchResults?.length}
           {searchResults?.length && searchResults?.length === 1
             ? " result"
-            : " results"}{" "}
-          for '{inputVal}'
+            : " results"}
+          {" "}
+          for '
+          {inputVal}
+          '
         </div>
       )}
 
       <ul>
-        {searchResults &&
-          searchResults.map(({ item, refIndex }) => (
+        {searchResults
+          && searchResults.map(({ item, refIndex }) => (
             <Card
               href={`/posts/${item.slug}/`}
               frontmatter={item.data}

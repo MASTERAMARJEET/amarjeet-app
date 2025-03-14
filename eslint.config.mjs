@@ -6,13 +6,16 @@ export default antfu({
   stylistic: {
     overrides: {
       "style/arrow-parens": "off",
+      "style/operator-linebreak": "off",
     },
     semi: true,
+    quotes: "double",
   },
   isInEditor: false,
   formatters: {
     prettierOptions: {
       printWidth: 80,
+      singleQuote: false,
     },
     astro: "prettier",
   },

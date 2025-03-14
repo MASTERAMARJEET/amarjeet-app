@@ -13,8 +13,8 @@ import { SITE, SOCIALS } from "@config";
 const posts = await getCollection("blog");
 
 const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+const featuredPosts = sortedPosts.filter((post) => post.data.featured);
+const recentPosts = sortedPosts.filter((post) => !post.data.featured);
 
 const socialCount = SOCIALS.filter((social) => social.active).length;
 ---
@@ -61,10 +61,10 @@ const socialCount = SOCIALS.filter((social) => social.active).length;
           <section id="featured" class="pb-6 pt-12">
             <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
             <ul>
-              {featuredPosts.map(({ data, slug }) => (
+              {featuredPosts.map((post) => (
                 <Card
-                  href={`/posts/${slug}/`}
-                  frontmatter={data}
+                  href={`/posts/${post.id}/`}
+                  frontmatter={post.data}
                   secHeading={false}
                 />
               ))}
@@ -81,11 +81,11 @@ const socialCount = SOCIALS.filter((social) => social.active).length;
           <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
           <ul>
             {recentPosts.map(
-              ({ data, slug }, index) =>
+              (post, index) =>
                 index < SITE.postPerIndex && (
                   <Card
-                    href={`/posts/${slug}/`}
-                    frontmatter={data}
+                    href={`/posts/${post.id}/`}
+                    frontmatter={post.data}
                     secHeading={false}
                   />
                 ),

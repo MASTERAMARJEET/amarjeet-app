@@ -42,9 +42,6 @@ export default defineConfig({
     },
   },
   scopedStyleStrategy: "where",
-  experimental: {
-    contentLayer: true,
-  },
   output: "server",
   adapter: cloudflare({
     platformProxy: {

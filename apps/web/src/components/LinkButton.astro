@@ -34,7 +34,7 @@ const {
       {target}
       class:list={["group inline-block hover:text-skin-accent", className]}
       aria-label={ariaLabel}
-      data-active={active}
+      data-active={active ? "true" : null}
     >
       <slot />
     </a>

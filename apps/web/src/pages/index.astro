@@ -13,8 +13,8 @@ import { SITE, SOCIALS } from "@config";
 const posts = await getCollection("blog");
 
 const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+const featuredPosts = sortedPosts.filter((post) => post.data.featured);
+const recentPosts = sortedPosts.filter((post) => !post.data.featured);
 
 const socialCount = SOCIALS.filter((social) => social.active).length;
 ---
@@ -29,7 +29,7 @@ const socialCount = SOCIALS.filter((social) => social.active).length;
       <a target="_blank" href="/rss.xml" class="mb-6" aria-label="rss feed">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="mb-2 h-6 w-6 scale-110 fill-skin-accent sm:mb-3 sm:scale-125"
+          class="mb-2 h-6 w-6 scale-110 fill-accent sm:mb-3 sm:scale-125"
           ><path
             d="M19 20.001C19 11.729 12.271 5 4 5v2c7.168 0 13 5.832 13 13.001h2z"
           ></path><path
@@ -61,10 +61,10 @@ const socialCount = SOCIALS.filter((social) => social.active).length;
           <section id="featured" class="pb-6 pt-12">
             <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
             <ul>
-              {featuredPosts.map(({ data, slug }) => (
+              {featuredPosts.map((post) => (
                 <Card
-                  href={`/posts/${slug}/`}
-                  frontmatter={data}
+                  href={`/posts/${post.id}/`}
+                  frontmatter={post.data}
                   secHeading={false}
                 />
               ))}
@@ -81,11 +81,11 @@ const socialCount = SOCIALS.filter((social) => social.active).length;
           <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
           <ul>
             {recentPosts.map(
-              ({ data, slug }, index) =>
+              (post, index) =>
                 index < SITE.postPerIndex && (
                   <Card
-                    href={`/posts/${slug}/`}
-                    frontmatter={data}
+                    href={`/posts/${post.id}/`}
+                    frontmatter={post.data}
                     secHeading={false}
                   />
                 ),

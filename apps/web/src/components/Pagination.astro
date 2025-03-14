@@ -16,7 +16,7 @@ const { page } = Astro.props;
       <LinkButton
         disabled={!page.url.prev}
         href={page.url.prev as string}
-        className={`mr-4 select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50`}
+        className={`mr-4 select-none data-disabled:pointer-events-none data-disabled:opacity-50`}
         ariaLabel="Previous"
       >
         <svg xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +28,7 @@ const { page } = Astro.props;
       <LinkButton
         disabled={!page.url.next}
         href={page.url.next as string}
-        className={`mx-4 select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50`}
+        className={`mx-4 select-none data-disabled:pointer-events-none data-disabled:opacity-50`}
         ariaLabel="Next"
       >
         Next

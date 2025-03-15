@@ -1,0 +1,28 @@
+{
+  // Schema reference
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+
+  "name": "dev--app-api",
+  "compatibility_date": "2024-10-22",
+  "compatibility_flags": ["nodejs_compat_v2"],
+  "main": "src/index.ts",
+
+  // Workers Logs
+  // Docs: https://developers.cloudflare.com/workers/observability/logs/workers-logs/
+  // Configuration: https://developers.cloudflare.com/workers/observability/logs/workers-logs/#enable-workers-logs
+  "observability": {
+    "enabled": true
+  },
+
+  "env": {
+    "prod": {
+      "name": "app-api",
+      "routes": [
+        {
+          "pattern": "api.amarjeet.app/*",
+          "zone_name": "amarjeet.app"
+        }
+      ]
+    }
+  }
+}

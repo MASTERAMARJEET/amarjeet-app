@@ -21,7 +21,7 @@
     "clean:all": "turbo clean && bun run clean"
   },
   "dependencies": {
-    "sst": "3.9.37"
+    "sst": "3.13.14"
   },
   "devDependencies": {
     "@antfu/eslint-config": "4.10.1",

@@ -13,11 +13,11 @@
     "clean": "rm -rf node_modules .turbo .wrangler"
   },
   "dependencies": {
-    "@hono/swagger-ui": "0.5.1",
-    "@hono/zod-openapi": "0.19.2",
-    "hono": "4.10.3"
+    "@hono/swagger-ui": "0.5.3",
+    "@hono/zod-openapi": "1.2.0",
+    "hono": "4.11.3"
   },
   "devDependencies": {
-    "wrangler": "4.0.0"
+    "wrangler": "4.54.0"
   }
 }

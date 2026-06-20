@@ -22,7 +22,7 @@
     "@astrojs/rss": "4.0.14",
     "@astrojs/sitemap": "3.6.0",
     "@resvg/resvg-wasm": "2.6.2",
-    "astro": "6.1.6",
+    "astro": "6.4.6",
     "astro-breadcrumbs": "3.3.3",
     "fuse.js": "7.1.0",
     "lodash.kebabcase": "4.1.1",
